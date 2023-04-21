@@ -20,6 +20,14 @@ apply plugin: 'kotlin-android-extensions'
 apply from: "$project.rootDir/tools/gradle/versionCode.gradle"
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('../firefox.jks')
+            storePassword 'Dangeon666'
+            keyAlias 'key0'
+            keyPassword 'Dangeon666'
+        }
+    }
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
 
@@ -29,18 +37,14 @@ android {
         targetSdkVersion 28
         versionCode 11 // This versionCode is "frozen" for local builds. For "release" builds we
         // override this with a generated versionCode at build time.
-        versionName "4.8"
+        versionName "4.8_RU"
         testInstrumentationRunner "org.mozilla.tv.firefox.FirefoxOnDeviceTestRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
 
         multiDexEnabled true
 
         ndk {
-            // This strips unused architectures out of our build, lowering out APK size.
-            // At this time, all FFTV devices run ARM v7, and most emulators use x86. See
-            // #2647 for details
-            // TODO improve APK size further in #2743
-            abiFilters 'armeabi-v7a', 'x86'
+            abiFilters 'armeabi-v7a'
         }
     }
 
@@ -63,6 +67,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {

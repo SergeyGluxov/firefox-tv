@@ -1,63 +1,38 @@
 [
     {
         "id": "youtube",
-        /* Use this URL to ensure users see the best formatted website. */
         "url": "https://ftv.cdn.mozilla.net/ytht",
         "title": "YouTube",
         "img": "tile_youtube.png"
     },
     {
-        "id": "googleVideo",
-        "url": "https://www.google.com/webhp?tbm=vid",
-        "title": "Video Search",
-        "img": "tile_google.png"
+        "id": "dzen",
+        "url": "https://dzen.ru/",
+        "title": "Яндекс",
+        "img": "title_yandex.png"
     },
     {
-        "id": "imdb",
-        "url": "https://m.imdb.com/",
-        "title": "IMDB",
-        "img": "tile_imdb.png"
+        "id": "vk",
+        "url": "https://vk.com/",
+        "title": "ВК",
+        "img": "title_vk.png"
     },
     {
-        "id": "rottenTomatoes",
-        "url": "https://www.rottentomatoes.com/",
-        "title": "Rotten Tomatoes",
-        "img": "tile_rotten_tomatoes.png"
+        "id": "ok",
+        "url": "https://ok.ru/",
+        "title": "Одноклассники",
+        "img": "title_ok.png"
     },
     {
-        "id": "metacritic",
-        "url": "https://www.metacritic.com/",
-        "title": "metacritic",
-        "img": "tile_metacritic.png"
+        "id": "ria",
+        "url": "https://ria.ru/",
+        "title": "РИА Новости",
+        "img": "title_ria.png"
     },
     {
-        "id": "fandango",
-        "url": "https://mobile.fandango.com/",
-        "title": "Fandango",
-        "img": "tile_fandango.png"
-    },
-    {
-        "id": "hollywoodReporter",
-        "url": "https://www.hollywoodreporter.com/",
-        "title": "Hollywood Reporter",
-        "img": "tile_hollywood_reporter.png"
-    },
-    {
-        "id": "flickr",
-        "url": "https://www.flickr.com/",
-        "title": "Flickr",
-        "img": "tile_flickr.png"
-    },
-    {
-        "id": "instagram",
-        "url": "https://www.instagram.com/",
-        "title": "Instagram",
-        "img": "tile_instagram.png"
-    },
-    {
-        "id": "pinterest",
-        "url": "https://www.pinterest.com/",
-        "title": "Pinterest",
-        "img": "tile_pinterest.png"
+        "id": "pikabu",
+        "url": "https://pikabu.ru/",
+        "title": "Пикабу",
+        "img": "title_pikabu.png"
     }
 ]

@@ -229,19 +229,19 @@ class NavigationOverlayFragment : Fragment() {
         observeTileRemoval()
             .forEach { compositeDisposable.add(it) }
         observeRequestFocus()
-                .addTo(compositeDisposable)
+            .addTo(compositeDisposable)
         observeChannelVisibility()
             .forEach { compositeDisposable.add(it) }
         observeTvGuideTiles()
             .forEach { compositeDisposable.add(it) }
         HintBinder.bindHintsToView(hintViewModel, hintBarContainer, animate = false)
-                .forEach { compositeDisposable.add(it) }
+            .forEach { compositeDisposable.add(it) }
         observeToolbarFocusability()
-                .addTo(compositeDisposable)
+            .addTo(compositeDisposable)
         toolbarUiController.observeToolbarState(rootView!!, fragmentManager!!)
             .forEach { compositeDisposable.add(it) }
 
-        fxaButton.isVisible = serviceLocator.experimentsProvider.shouldShowSendTab()
+        fxaButton.isVisible = false
     }
 
     override fun onStop() {
@@ -350,14 +350,14 @@ class NavigationOverlayFragment : Fragment() {
 
     private fun observeToolbarFocusability(): Disposable {
         return navigationOverlayViewModel.leftmostActiveToolBarId
-                .subscribe { leftmostToolbarId ->
-                    // Reset previous left most active toolbar button's nextFocusLeftID
-                    rootView?.findViewById<View>(navUrlInput.nextFocusUpId)?.nextFocusLeftId = -1
-                    // Disable left direction click on leftmostToolbarId
-                    rootView?.findViewById<View>(leftmostToolbarId)?.nextFocusLeftId = leftmostToolbarId
+            .subscribe { leftmostToolbarId ->
+                // Reset previous left most active toolbar button's nextFocusLeftID
+                rootView?.findViewById<View>(navUrlInput.nextFocusUpId)?.nextFocusLeftId = -1
+                // Disable left direction click on leftmostToolbarId
+                rootView?.findViewById<View>(leftmostToolbarId)?.nextFocusLeftId = leftmostToolbarId
 
-                    navUrlInput.nextFocusUpId = leftmostToolbarId
-                }
+                navUrlInput.nextFocusUpId = leftmostToolbarId
+            }
     }
 
     private fun observeChannelVisibility(): List<Disposable> {
@@ -387,9 +387,9 @@ class NavigationOverlayFragment : Fragment() {
     }
     private fun observeRequestFocus(): Disposable {
         return navigationOverlayViewModel.focusView
-                .subscribe { viewToFocus ->
-                    rootView?.findViewById<View>(viewToFocus)?.requestFocus()
-                }
+            .subscribe { viewToFocus ->
+                rootView?.findViewById<View>(viewToFocus)?.requestFocus()
+            }
     }
 
     private fun observeTvGuideTiles(): List<Disposable> {
@@ -408,49 +408,49 @@ class NavigationOverlayFragment : Fragment() {
         }
 
     private fun createChannelFactory(): DefaultChannelFactory = DefaultChannelFactory(
-            loadUrl = { urlStr ->
-                if (urlStr.isNotEmpty()) {
-                    onNavigationEvent.invoke(NavigationEvent.LOAD_TILE, urlStr, null)
-                }
-            },
-            onTileFocused = {
-                val prefInt = PreferenceManager.getDefaultSharedPreferences(context).getInt(
-                        SHOW_UNPIN_TOAST_COUNTER_PREF, 0)
-                if (prefInt < MAX_UNPIN_TOAST_COUNT && canShowUnpinToast) {
-                    PreferenceManager.getDefaultSharedPreferences(context)
-                            .edit()
-                            .putInt(SHOW_UNPIN_TOAST_COUNTER_PREF, prefInt + 1)
-                            .apply()
-
-                    val contextReference = WeakReference(context)
-                    val showToast = showToast@{
-                        val context = contextReference.get() ?: return@showToast
-                        ViewUtils.showCenteredBottomToast(context, R.string.homescreen_unpin_tutorial_toast)
-                    }
-                    // We believe this delays in order to avoid speaking over the focus
-                    // change announcement. However this is taken legacy code, so there
-                    // may be other reasons as well
-                    if (context!!.isVoiceViewEnabled()) uiHandler.postDelayed(showToast, 1500)
-                    else showToast.invoke()
-
-                    canShowUnpinToast = false
-                }
+        loadUrl = { urlStr ->
+            if (urlStr.isNotEmpty()) {
+                onNavigationEvent.invoke(NavigationEvent.LOAD_TILE, urlStr, null)
             }
+        },
+        onTileFocused = {
+            val prefInt = PreferenceManager.getDefaultSharedPreferences(context).getInt(
+                SHOW_UNPIN_TOAST_COUNTER_PREF, 0)
+            if (prefInt < MAX_UNPIN_TOAST_COUNT && canShowUnpinToast) {
+                PreferenceManager.getDefaultSharedPreferences(context)
+                    .edit()
+                    .putInt(SHOW_UNPIN_TOAST_COUNTER_PREF, prefInt + 1)
+                    .apply()
+
+                val contextReference = WeakReference(context)
+                val showToast = showToast@{
+                    val context = contextReference.get() ?: return@showToast
+                    ViewUtils.showCenteredBottomToast(context, R.string.homescreen_unpin_tutorial_toast)
+                }
+                // We believe this delays in order to avoid speaking over the focus
+                // change announcement. However this is taken legacy code, so there
+                // may be other reasons as well
+                if (context!!.isVoiceViewEnabled()) uiHandler.postDelayed(showToast, 1500)
+                else showToast.invoke()
+
+                canShowUnpinToast = false
+            }
+        }
     )
 
     private fun initSettingsChannel() {
         settingsTileContainer.gridView.adapter = SettingsChannelAdapter(
-                loadUrl = { urlStr ->
-                    onNavigationEvent.invoke(NavigationEvent.LOAD_TILE, urlStr, null)
-                },
-                showSettings = { type ->
-                    val navigationEvent = when (type) {
-                        SettingsScreen.DATA_COLLECTION -> NavigationEvent.SETTINGS_DATA_COLLECTION
-                        SettingsScreen.CLEAR_COOKIES -> NavigationEvent.SETTINGS_CLEAR_COOKIES
-                        SettingsScreen.FXA_PROFILE -> NavigationEvent.FXA_BUTTON
-                    }
-                    onNavigationEvent.invoke(navigationEvent, null, null)
+            loadUrl = { urlStr ->
+                onNavigationEvent.invoke(NavigationEvent.LOAD_TILE, urlStr, null)
+            },
+            showSettings = { type ->
+                val navigationEvent = when (type) {
+                    SettingsScreen.DATA_COLLECTION -> NavigationEvent.SETTINGS_DATA_COLLECTION
+                    SettingsScreen.CLEAR_COOKIES -> NavigationEvent.SETTINGS_CLEAR_COOKIES
+                    SettingsScreen.FXA_PROFILE -> NavigationEvent.FXA_BUTTON
                 }
+                onNavigationEvent.invoke(navigationEvent, null, null)
+            }
         )
     }
 

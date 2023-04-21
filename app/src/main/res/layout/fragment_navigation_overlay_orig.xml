@@ -19,15 +19,16 @@
         android:layout_height="wrap_content"
         android:background="#2A2A2E"
         android:gravity="center"
+        android:visibility="gone"
         android:orientation="horizontal">
 
-      <ImageView
-          android:contentDescription="@null"
-          android:layout_width="80sp"
-          android:layout_height="64sp"
-          android:paddingStart="16dp"
-          android:paddingEnd="16dp"
-          android:src="@drawable/warning"/>
+        <ImageView
+            android:contentDescription="@null"
+            android:layout_width="80sp"
+            android:layout_height="64sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:src="@drawable/warning"/>
 
         <TextView
             android:id="@+id/bannerTextView"

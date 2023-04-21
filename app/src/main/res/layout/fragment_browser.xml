@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- This Source Code Form is subject to the terms of the Mozilla Public
+<?xml version="1.0" encoding="utf-8"?><!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/browserFragmentRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/browserContainer"
@@ -18,61 +17,61 @@
             android:id="@+id/bannerLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:background="#2A2A2E"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
-                android:contentDescription="@null"
                 android:layout_width="80sp"
                 android:layout_height="64sp"
+                android:contentDescription="@null"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
-                android:src="@drawable/warning"/>
+                android:src="@drawable/warning" />
 
             <TextView
-              android:id="@+id/bannerTextView"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_weight="1"
-              android:fontFamily="@string/font_ember_regular"
-              android:textSize="18sp"
-              android:lineSpacingExtra="6sp"
-              android:paddingTop="16dp"
-              android:paddingBottom="16dp"
-              android:text="@string/banner_text"
-              android:textColor="#FBFBFE" />
+                android:id="@+id/bannerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@string/font_ember_regular"
+                android:lineSpacingExtra="6sp"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/banner_text"
+                android:textColor="#FBFBFE"
+                android:textSize="18sp" />
 
-          <Button
-              android:id="@+id/bannerMoreInfoButton"
-              style="@style/BannerConfirmButton"
-              android:layout_width="wrap_content"
-              android:layout_height="36dp"
-              android:layout_marginStart="8dp"
-              android:layout_marginEnd="16dp"
-              android:layout_weight="0"
-              android:text="@string/banner_more_info_button"
-              android:textSize="18sp"
-              android:fontFamily="@string/font_ember_regular"/>
+            <Button
+                android:id="@+id/bannerMoreInfoButton"
+                style="@style/BannerConfirmButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="0"
+                android:fontFamily="@string/font_ember_regular"
+                android:text="@string/banner_more_info_button"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <org.mozilla.tv.firefox.widget.ResizableKeyboardCoordinatorLayout
-            app:viewToHideWhenActivated="@+id/erase"
-            android:layout_marginTop="0dp"
             android:id="@+id/main_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            android:clipChildren="false"
             android:orientation="vertical"
-            android:clipChildren="false">
+            app:viewToHideWhenActivated="@+id/erase">
 
             <mozilla.components.concept.engine.EngineView
                 android:id="@+id/engineView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scrollbarThumbVertical="@drawable/scrollbar_thumb">
-            </mozilla.components.concept.engine.EngineView>
+                android:scrollbarThumbVertical="@drawable/scrollbar_thumb"></mozilla.components.concept.engine.EngineView>
 
-            <include layout="@layout/hint_bar"/>
+            <include layout="@layout/hint_bar" />
 
         </org.mozilla.tv.firefox.widget.ResizableKeyboardCoordinatorLayout>
     </LinearLayout>
