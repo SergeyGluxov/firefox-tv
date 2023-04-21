@@ -32,14 +32,15 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId "org.mozilla.tv.firefox"
+        applicationId "org.mozilla.tv.firefox2"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 11 // This versionCode is "frozen" for local builds. For "release" builds we
+        versionCode 12 // This versionCode is "frozen" for local builds. For "release" builds we
         // override this with a generated versionCode at build time.
-        versionName "4.8_RU"
+        versionName "4.8.1_RU"
         testInstrumentationRunner "org.mozilla.tv.firefox.FirefoxOnDeviceTestRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
+        setProperty("archivesBaseName", "firefox-$versionName-$versionCode")
 
         multiDexEnabled true
 
